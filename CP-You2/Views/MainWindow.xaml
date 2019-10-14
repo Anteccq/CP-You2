@@ -5,11 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CP_You2.Views"
         mc:Ignorable="d"
-        Title="CP-You2" Height="37" Width="280" WindowStyle="None" AllowsTransparency="True" ResizeMode="NoResize">
+        Title="CP-You2" Height="37" SizeToContent="Width" WindowStyle="None" AllowsTransparency="True" ResizeMode="NoResize" Background="#300000ff">
     <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="37" ResizeBorderThickness="0"/>
+        <WindowChrome CaptionHeight="35" ResizeBorderThickness="0"/>
     </WindowChrome.WindowChrome>
+    <Window.Resources>
+        <Brush x:Key="ForegroundColor">Aqua</Brush>
+    </Window.Resources>
     <Grid>
-        
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+            <TextBlock Text="CPU" FontSize="22" VerticalAlignment="Center" Margin="8,0,0,0" Foreground="{StaticResource ForegroundColor}"/>
+            <ProgressBar Value="10" VerticalAlignment="Center" Maximum="100" Margin="8,0,0,0" Height="30" Width="150" Foreground="{StaticResource ForegroundColor}" BorderBrush="{StaticResource ForegroundColor}" Background="Transparent"/>
+            <TextBlock Text="10%" FontSize="25" VerticalAlignment="Center" Margin="8,0,5,0" Foreground="{StaticResource ForegroundColor}"/>
+        </StackPanel>
     </Grid>
 </Window>

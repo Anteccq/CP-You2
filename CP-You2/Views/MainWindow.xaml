@@ -3,20 +3,24 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewmodel="clr-namespace:CP_You2.ViewModels"
         xmlns:local="clr-namespace:CP_You2.Views"
         mc:Ignorable="d"
         Title="CP-You2" Height="37" SizeToContent="Width" WindowStyle="None" AllowsTransparency="True" ResizeMode="NoResize" Background="#300000ff">
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="35" ResizeBorderThickness="0"/>
     </WindowChrome.WindowChrome>
+    <Window.DataContext>
+        <viewmodel:MainWindowViewModel/>
+    </Window.DataContext>
     <Window.Resources>
         <Brush x:Key="ForegroundColor">Aqua</Brush>
     </Window.Resources>
     <Grid>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
             <TextBlock Text="CPU" FontSize="22" VerticalAlignment="Center" Margin="8,0,0,0" Foreground="{StaticResource ForegroundColor}"/>
-            <ProgressBar Value="10" VerticalAlignment="Center" Maximum="100" Margin="8,0,0,0" Height="30" Width="150" Foreground="{StaticResource ForegroundColor}" BorderBrush="{StaticResource ForegroundColor}" Background="Transparent"/>
-            <TextBlock Text="10%" FontSize="25" VerticalAlignment="Center" Margin="8,0,5,0" Foreground="{StaticResource ForegroundColor}"/>
+            <ProgressBar Value="{Binding CpuPercentage.Value.TotalPercentage, Mode=OneWay}" VerticalAlignment="Center" Maximum="100" Margin="8,0,0,0" Height="30" Width="150" Foreground="{StaticResource ForegroundColor}" BorderBrush="{StaticResource ForegroundColor}" Background="Transparent"/>
+            <TextBlock Text="{Binding CpuPercentage.Value.TotalPercentage,StringFormat={}{0}%, Mode=OneWay}" FontSize="25" VerticalAlignment="Center" Margin="8,0,5,0" Foreground="{StaticResource ForegroundColor}"/>
         </StackPanel>
     </Grid>
 </Window>

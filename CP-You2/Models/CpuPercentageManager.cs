@@ -18,6 +18,8 @@ namespace CP_You2.Models
         private const string INSTANCE_NAME = "_Total";
         private static readonly PerformanceCounter TotalCounter = new PerformanceCounter(CATEGORY_NAME, COUNTER_NAME, INSTANCE_NAME);
         private static readonly PerformanceCounter[] Counters = new PerformanceCounter[Environment.ProcessorCount];
+        private static IObservable<long> PerSecTimer = null;
+
 
         private int _totalPercentage = -1;
         public int TotalPercentage
@@ -25,10 +27,10 @@ namespace CP_You2.Models
             get
             {
                 if (_totalPercentage != -1) return _totalPercentage;
-
                 _totalPercentage = 0;
-                Observable.Timer(TimeSpan.Zero, TimeSpan.FromMilliseconds(1000))
-                    .Subscribe(_ => this.SetProperty(ref _totalPercentage, (int)TotalCounter.NextValue() ));
+
+                if (PerSecTimer == null) PerSecTimer = Observable.Timer(TimeSpan.Zero, TimeSpan.FromMilliseconds(1000));
+                PerSecTimer.Subscribe(_ => this.SetProperty(ref _totalPercentage, (int)TotalCounter.NextValue() ));
                 return _totalPercentage;
             }
         }
@@ -41,10 +43,15 @@ namespace CP_You2.Models
             {
                 if (_cpuPercentages != null) return _cpuPercentages;
                 _cpuPercentages = new int[Environment.ProcessorCount];
-                Observable.Timer(TimeSpan.Zero, TimeSpan.FromMilliseconds(1000))
-                    .Subscribe(
-                        _ => this.SetProperty(ref _cpuPercentages, Counters.Select(c => (int)c.NextValue()).ToArray())
-                    );
+
+                if (PerSecTimer == null) PerSecTimer = Observable.Timer(TimeSpan.Zero, TimeSpan.FromMilliseconds(1000));
+                PerSecTimer.Subscribe(_ =>
+                {
+                    for (var i = 0; i < Counters.Length; i++)
+                    {
+                        SetProperty(ref _cpuPercentages[i], (int)Counters[i].NextValue());
+                    }
+                });
                 return _cpuPercentages;
             }
         }

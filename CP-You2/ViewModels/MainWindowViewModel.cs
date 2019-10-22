@@ -9,11 +9,17 @@ namespace CP_You2.ViewModels
 {
     public class MainWindowViewModel : BindableBase
     {
-        public ReactiveProperty<CpuPercentageManager> CpuPercentage { get; }
+        public CpuPercentageManager CpuPercentage { get; } = new CpuPercentageManager();
+
+        public DisplayModeManager DisplayMode { get; }
+
+        public ReactiveCommand ModeChangeCommand { get; }
 
         public MainWindowViewModel()
         {
-            CpuPercentage = new ReactiveProperty<CpuPercentageManager>(new CpuPercentageManager());
+            DisplayMode = new DisplayModeManager();
+            ModeChangeCommand = new ReactiveCommand(); 
+            ModeChangeCommand.Subscribe(_ => DisplayMode.ModeChange());
         }
     }
 }

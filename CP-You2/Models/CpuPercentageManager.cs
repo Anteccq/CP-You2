@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Threading;
+using System.Windows;
 using Reactive;
 using Reactive.Bindings;
 using Reactive.Bindings.Binding;
@@ -35,24 +38,32 @@ namespace CP_You2.Models
             }
         }
 
-        private int[] _cpuPercentages;
+        private ReactiveCollection<int> _cpuPercentageCollection = null;
 
-        public int[] CpuPercentages
+        public ReactiveCollection<int> CpuPercentageCollection
         {
             get
             {
-                if (_cpuPercentages != null) return _cpuPercentages;
-                _cpuPercentages = new int[Environment.ProcessorCount];
+                if (_cpuPercentageCollection == null)
+                {
+                    _cpuPercentageCollection = new ReactiveCollection<int>();
+                    for (int i = 0; i < Environment.ProcessorCount; i++)
+                    {
+                        _cpuPercentageCollection.Add(0);
+                    }
+                }
 
                 if (PerSecTimer == null) PerSecTimer = Observable.Timer(TimeSpan.Zero, TimeSpan.FromMilliseconds(1000));
-                PerSecTimer.Subscribe(_ =>
-                {
-                    for (var i = 0; i < Counters.Length; i++)
+                PerSecTimer.ObserveOn(SynchronizationContext.Current)
+                    .Subscribe(_ =>
                     {
-                        SetProperty(ref _cpuPercentages[i], (int)Counters[i].NextValue());
-                    }
-                });
-                return _cpuPercentages;
+                        for (var i = 0; i < Counters.Length; i++)
+                        {
+                            _cpuPercentageCollection[i] = (int)Counters[i].NextValue();
+                        }
+                    });
+
+                return _cpuPercentageCollection;
             }
         }
 

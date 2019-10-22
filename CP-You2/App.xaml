@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:CP_You2"
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
-         
+        <Brush x:Key="ForegroundColor">Aqua</Brush>
     </Application.Resources>
 </Application>

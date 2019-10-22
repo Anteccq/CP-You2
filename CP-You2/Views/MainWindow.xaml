@@ -22,8 +22,8 @@
             </i:EventTrigger>
         </i:Interaction.Triggers>
         <StackPanel>
-            <local:TotalCpuUsageView Margin="0,4" Visibility="{Binding DisplayMode.IsTotalMode, Converter={StaticResource B2VConverter}, ConverterParameter=false}"/>
-            <local:EveryCpuUsageView Margin="0,4" Visibility="{Binding DisplayMode.IsTotalMode, Converter={StaticResource B2VConverter}, ConverterParameter=true}"/>
+            <local:TotalCpuUsageView Margin="0,4" Visibility="{Binding DisplayMode.IsTotalMode, Converter={StaticResource B2VConverter}, ConverterParameter=true}"/>
+            <local:EveryCpuUsageView Margin="0,4" Visibility="{Binding DisplayMode.IsTotalMode, Converter={StaticResource B2VConverter}, ConverterParameter=false}"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -7,13 +7,21 @@
              xmlns:local="clr-namespace:CP_You2.Views"
              mc:Ignorable="d">
     <Grid>
-        <ItemsControl ItemsSource="{Binding CpuPercentage.Value.CpuPercentageCollection}" AlternationCount="50">
+        <ItemsControl ItemsSource="{Binding CpuPercentage.CpuPercentageCollection}" AlternationCount="50">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                        <TextBlock Text="{Binding Path=(ItemsControl.AlternationIndex), RelativeSource={RelativeSource TemplatedParent}, StringFormat=CPU{0}}" FontSize="22" VerticalAlignment="Center" Margin="8,0,0,0" Foreground="{StaticResource ForegroundColor}"/>
-                        <ProgressBar Value="{Binding Mode=OneWay}" VerticalAlignment="Center" Maximum="100" Margin="8,0,0,0" Height="30" Width="150" Foreground="{StaticResource ForegroundColor}" BorderBrush="{StaticResource ForegroundColor}" Background="Transparent"/>
-                        <TextBlock Text="{Binding StringFormat={}{0}%, Mode=OneWay}" FontSize="25" VerticalAlignment="Center" Margin="8,0,5,0" Foreground="{StaticResource ForegroundColor}"/>
+                        <TextBlock
+                            Text="{Binding Path=(ItemsControl.AlternationIndex), RelativeSource={RelativeSource TemplatedParent}, StringFormat=CPU{0}}"
+                            FontSize="20" VerticalAlignment="Center" Margin="8,0,0,0" Width="50"
+                            Foreground="{StaticResource ForegroundColor}" />
+                        <ProgressBar Value="{Binding Mode=OneWay}" VerticalAlignment="Center" Maximum="100"
+                                     Margin="8,0,0,0" Height="30" Width="150"
+                                     Foreground="{StaticResource ForegroundColor}"
+                                     BorderBrush="{StaticResource ForegroundColor}" Background="Transparent" />
+                        <TextBlock Text="{Binding StringFormat={}{0}%, Mode=OneWay}" Width="48" TextAlignment="Right"
+                                   FontSize="20" VerticalAlignment="Center" Margin="4,0,4,0"
+                                   Foreground="{StaticResource ForegroundColor}" />
                     </StackPanel>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

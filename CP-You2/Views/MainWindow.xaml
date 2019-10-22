@@ -4,19 +4,26 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewmodel="clr-namespace:CP_You2.ViewModels"
+        xmlns:converter="clr-namespace:CP_You2.Converters"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:CP_You2.Views"
         mc:Ignorable="d"
-        Title="CP-You2" MinHeight="37" SizeToContent="WidthAndHeight" WindowStyle="None" AllowsTransparency="True" ResizeMode="NoResize" Background="#300000ff">
-    <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="35" ResizeBorderThickness="0"/>
-    </WindowChrome.WindowChrome>
+        Title="CP-You2" SizeToContent="WidthAndHeight" WindowStyle="None" AllowsTransparency="True" ResizeMode="NoResize" Background="#300000ff">
+    <Window.Resources>
+        <converter:Bool2VisibilityConverter x:Key="B2VConverter"/>
+    </Window.Resources>
     <Window.DataContext>
         <viewmodel:MainWindowViewModel/>
     </Window.DataContext>
     <Grid>
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="MouseRightButtonUp">
+                <i:InvokeCommandAction Command="{Binding ModeChangeCommand}" />
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
         <StackPanel>
-            <local:TotalCpuUsageView/>
-            <local:EveryCpuUsageView/>
+            <local:TotalCpuUsageView Margin="0,4" Visibility="{Binding DisplayMode.IsTotalMode, Converter={StaticResource B2VConverter}, ConverterParameter=false}"/>
+            <local:EveryCpuUsageView Margin="0,4" Visibility="{Binding DisplayMode.IsTotalMode, Converter={StaticResource B2VConverter}, ConverterParameter=true}"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -7,9 +7,13 @@
              mc:Ignorable="d">
     <Grid>
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-            <TextBlock Text="CPU" FontSize="22" VerticalAlignment="Center" Margin="8,0,0,0" Foreground="{StaticResource ForegroundColor}"/>
-            <ProgressBar Value="{Binding CpuPercentage.Value.TotalPercentage, Mode=OneWay}" VerticalAlignment="Center" Maximum="100" Margin="8,0,0,0" Height="30" Width="150" Foreground="{StaticResource ForegroundColor}" BorderBrush="{StaticResource ForegroundColor}" Background="Transparent"/>
-            <TextBlock Text="{Binding CpuPercentage.Value.TotalPercentage,StringFormat={}{0}%, Mode=OneWay}" FontSize="25" VerticalAlignment="Center" Margin="8,0,5,0" Foreground="{StaticResource ForegroundColor}"/>
+            <TextBlock Text="CPU" FontSize="20" VerticalAlignment="Center" Width="50"
+                       Margin="8,0,0,0" Foreground="{StaticResource ForegroundColor}" />
+            <ProgressBar Value="{Binding CpuPercentage.TotalPercentage, Mode=OneWay}" Maximum="100" Height="30"
+                         Width="150" Foreground="{StaticResource ForegroundColor}" Margin="8,0,0,0"
+                         BorderBrush="{StaticResource ForegroundColor}" Background="Transparent" />
+            <TextBlock Text="{Binding CpuPercentage.TotalPercentage, Mode=OneWay, StringFormat={}{0}%}" Width="48" TextAlignment="Right" FontSize="20" VerticalAlignment="Center"
+                       Margin="4,0,4,0" Foreground="{StaticResource ForegroundColor}" />
         </StackPanel>
     </Grid>
 </UserControl>

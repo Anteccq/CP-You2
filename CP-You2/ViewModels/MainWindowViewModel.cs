@@ -11,15 +11,15 @@ namespace CP_You2.ViewModels
     {
         public CpuPercentageManager CpuPercentage { get; } = new CpuPercentageManager();
 
-        public DisplayModeManager DisplayMode { get; }
+        public WindowManager WindowManager { get; }
 
         public ReactiveCommand ModeChangeCommand { get; }
 
         public MainWindowViewModel()
         {
-            DisplayMode = new DisplayModeManager();
+            WindowManager = new WindowManager();
             ModeChangeCommand = new ReactiveCommand(); 
-            ModeChangeCommand.Subscribe(_ => DisplayMode.ModeChange());
+            ModeChangeCommand.Subscribe(_ => WindowManager.ModeChange());
         }
     }
 }

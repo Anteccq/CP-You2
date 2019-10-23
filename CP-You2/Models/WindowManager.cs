@@ -6,7 +6,7 @@ using Prism.Mvvm;
 
 namespace CP_You2.Models
 {
-    public class DisplayModeManager : BindableBase
+    public class WindowManager : BindableBase
     {
         private bool _isTotalMode = true;
 

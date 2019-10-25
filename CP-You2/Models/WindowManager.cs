@@ -32,12 +32,7 @@ namespace CP_You2.Models
         public double Left
         {
             get => _left;
-            set
-            {
-                if (SystemParameters.VirtualScreenWidth < value) value = SystemParameters.VirtualScreenWidth;
-                else if (0 > value) value = 0;
-                this.SetProperty(ref _left, value);
-            }
+            set => this.SetProperty(ref _left, value);
         }
 
         private double _top;
@@ -45,12 +40,7 @@ namespace CP_You2.Models
         public double Top
         {
             get => _top;
-            set
-            {
-                if (SystemParameters.VirtualScreenHeight < value) value = SystemParameters.VirtualScreenHeight;
-                else if (0 > value) value = 0;
-                this.SetProperty(ref _top, value);
-            }
+            set => this.SetProperty(ref _top, value);
         }
 
         public WindowManager()

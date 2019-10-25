@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reactive.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,6 +21,13 @@ namespace CP_You2.Views
         public MainWindow()
         {
             InitializeComponent();
+            Observable.FromEventPattern<MouseButtonEventHandler, MouseButtonEventArgs>(
+                    h => h.Invoke,
+                    handler => this.MouseLeftButtonDown += handler,
+                    handler => this.MouseLeftButtonDown -= handler)
+                .Where(e => e.EventArgs.ButtonState == MouseButtonState.Pressed)
+                .Subscribe(_ => this.DragMove());
         }
     }
 }
+

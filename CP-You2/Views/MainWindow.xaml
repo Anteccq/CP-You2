@@ -8,13 +8,19 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:CP_You2.Views"
         mc:Ignorable="d"
-        Title="CP-You2" SizeToContent="WidthAndHeight" WindowStyle="None" AllowsTransparency="True" ResizeMode="NoResize" Background="#300000ff">
+        Title="CP-You2" SizeToContent="WidthAndHeight" WindowStyle="None" AllowsTransparency="True" ResizeMode="NoResize" Background="#300000ff"
+        Left="{Binding WindowManager.Left, Mode=TwoWay}" Top="{Binding WindowManager.Top, Mode=TwoWay}">
     <Window.Resources>
         <converter:Bool2VisibilityConverter x:Key="B2VConverter"/>
     </Window.Resources>
     <Window.DataContext>
         <viewmodel:MainWindowViewModel/>
     </Window.DataContext>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding WindowDataLoadAsyncCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <i:Interaction.Triggers>
             <i:EventTrigger EventName="MouseRightButtonUp">
@@ -22,8 +28,8 @@
             </i:EventTrigger>
         </i:Interaction.Triggers>
         <StackPanel>
-            <local:TotalCpuUsageView Margin="0,4" Visibility="{Binding DisplayMode.IsTotalMode, Converter={StaticResource B2VConverter}, ConverterParameter=true}"/>
-            <local:EveryCpuUsageView Margin="0,4" Visibility="{Binding DisplayMode.IsTotalMode, Converter={StaticResource B2VConverter}, ConverterParameter=false}"/>
+            <local:TotalCpuUsageView Margin="0,4" Visibility="{Binding WindowManager.IsTotalMode, Converter={StaticResource B2VConverter}, ConverterParameter=true}"/>
+            <local:EveryCpuUsageView Margin="0,4" Visibility="{Binding WindowManager.IsTotalMode, Converter={StaticResource B2VConverter}, ConverterParameter=false}"/>
         </StackPanel>
     </Grid>
 </Window>

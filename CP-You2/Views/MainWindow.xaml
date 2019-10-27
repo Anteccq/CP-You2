@@ -7,20 +7,18 @@
         xmlns:converter="clr-namespace:CP_You2.Converters"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:CP_You2.Views"
+        xmlns:be="clr-namespace:CP_You2.Behaviors"
         mc:Ignorable="d"
-        Title="CP-You2" SizeToContent="WidthAndHeight" WindowStyle="None" AllowsTransparency="True" ResizeMode="NoResize" Background="#300000ff"
-        Left="{Binding WindowManager.Left, Mode=TwoWay}" Top="{Binding WindowManager.Top, Mode=TwoWay}">
+        Title="CP-You2" SizeToContent="WidthAndHeight" WindowStyle="None" AllowsTransparency="True" ResizeMode="NoResize" Background="#300000ff">
     <Window.Resources>
         <converter:Bool2VisibilityConverter x:Key="B2VConverter"/>
     </Window.Resources>
     <Window.DataContext>
         <viewmodel:MainWindowViewModel/>
     </Window.DataContext>
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding WindowDataLoadAsyncCommand}"/>
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
+    <i:Interaction.Behaviors>
+        <be:WindowLocationBehavior Left="{Binding WindowManager.WindowData.Left, Mode=TwoWay}" Top="{Binding WindowManager.WindowData.Top, Mode=TwoWay}"/>
+    </i:Interaction.Behaviors>
     <Grid>
         <i:Interaction.Triggers>
             <i:EventTrigger EventName="MouseRightButtonUp">
@@ -28,8 +26,8 @@
             </i:EventTrigger>
         </i:Interaction.Triggers>
         <StackPanel>
-            <local:TotalCpuUsageView Margin="0,4" Visibility="{Binding WindowManager.IsTotalMode, Converter={StaticResource B2VConverter}, ConverterParameter=true}"/>
-            <local:EveryCpuUsageView Margin="0,4" Visibility="{Binding WindowManager.IsTotalMode, Converter={StaticResource B2VConverter}, ConverterParameter=false}"/>
+            <local:TotalCpuUsageView Margin="0,4" Visibility="{Binding WindowManager.WindowData.IsTotalMode, Converter={StaticResource B2VConverter}, ConverterParameter=true}"/>
+            <local:EveryCpuUsageView Margin="0,4" Visibility="{Binding WindowManager.WindowData.IsTotalMode, Converter={StaticResource B2VConverter}, ConverterParameter=false}"/>
         </StackPanel>
     </Grid>
 </Window>

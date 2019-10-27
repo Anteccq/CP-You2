@@ -9,5 +9,6 @@ namespace CP_You2.Interfaces
     {
         Task SaveAsync();
         Task LoadAsync();
+        void Load();
     }
 }

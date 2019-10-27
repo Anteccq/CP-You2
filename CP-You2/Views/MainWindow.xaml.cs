@@ -27,6 +27,7 @@ namespace CP_You2.Views
                     handler => this.MouseLeftButtonDown -= handler)
                 .Where(e => e.EventArgs.ButtonState == MouseButtonState.Pressed)
                 .Subscribe(_ => this.DragMove());
+            Exit.Click += (s,e) => this.Close();
         }
     }
 }

@@ -30,5 +30,13 @@ namespace CP_You2.Models
             get => _top;
             set => this.SetProperty(ref _top, value);
         }
+
+        private bool _isTopMost;
+
+        public bool IsTopMost
+        {
+            get => _isTopMost;
+            set => this.SetProperty(ref _isTopMost, value);
+        }
     }
 }

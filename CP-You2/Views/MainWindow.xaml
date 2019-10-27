@@ -3,10 +3,41 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewmodel="clr-namespace:CP_You2.ViewModels"
+        xmlns:converter="clr-namespace:CP_You2.Converters"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:CP_You2.Views"
+        xmlns:be="clr-namespace:CP_You2.Behaviors"
+        xmlns:tb="http://www.hardcodet.net/taskbar"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="CP-You2" SizeToContent="WidthAndHeight" WindowStyle="None" AllowsTransparency="True" ResizeMode="NoResize" Background="#300000ff"
+        ShowInTaskbar="False" x:Name="Window" Icon="/icons/JuelCore.ico">
+    <Window.Resources>
+        <converter:Bool2VisibilityConverter x:Key="B2VConverter"/>
+    </Window.Resources>
+    <Window.DataContext>
+        <viewmodel:MainWindowViewModel/>
+    </Window.DataContext>
+    <i:Interaction.Behaviors>
+        <be:WindowLocationBehavior Left="{Binding WindowManager.WindowData.Left, Mode=TwoWay}" Top="{Binding WindowManager.WindowData.Top, Mode=TwoWay}"/>
+    </i:Interaction.Behaviors>
     <Grid>
-        
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="MouseRightButtonUp">
+                <i:InvokeCommandAction Command="{Binding ModeChangeCommand}" />
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
+        <StackPanel>
+            <local:TotalCpuUsageView Margin="0,4" Visibility="{Binding WindowManager.WindowData.IsTotalMode, Converter={StaticResource B2VConverter}, ConverterParameter=true}"/>
+            <local:EveryCpuUsageView Margin="0,4" Visibility="{Binding WindowManager.WindowData.IsTotalMode, Converter={StaticResource B2VConverter}, ConverterParameter=false}"/>
+        </StackPanel>
+        <tb:TaskbarIcon IconSource="/icons/JuelCore.ico">
+            <tb:TaskbarIcon.ContextMenu>
+                <ContextMenu>
+                    <MenuItem IsCheckable="True" Header="Always on Top"/>
+                    <MenuItem x:Name="Exit" Header="Exit"/>
+                </ContextMenu>
+            </tb:TaskbarIcon.ContextMenu>
+        </tb:TaskbarIcon>
     </Grid>
 </Window>

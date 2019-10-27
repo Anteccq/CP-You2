@@ -91,6 +91,7 @@ namespace CP_You2.Models
                 this.WindowData.Left = windowData.Left;
                 this.WindowData.Top = windowData.Top;
                 this.WindowData.IsTotalMode = windowData.IsTotalMode;
+                this.WindowData.IsTopMost = windowData.IsTopMost;
             }
             catch (Exception e)
             {

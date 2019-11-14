@@ -27,6 +27,6 @@ https://github.com/hardcodet/wpf-notifyicon/blob/master/LICENSE
 The MIT License (MIT) Copyright (c) .NET Foundation  
 https://github.com/PrismLibrary/Prism/blob/master/LICENSE  
 
-* Microsoft.Xaml.Behaviors.Wpf
+* Microsoft.Xaml.Behaviors.Wpf  
 The MIT License (MIT) Copyright (c) 2015 Microsoft  
 https://github.com/microsoft/XamlBehaviorsWpf/blob/master/LICENSE

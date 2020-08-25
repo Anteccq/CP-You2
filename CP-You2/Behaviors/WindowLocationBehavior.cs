@@ -33,11 +33,11 @@ namespace CP_You2.Behaviors
 
             AssociatedObject.Top = this.Top;
             AssociatedObject.Left = this.Left;
-
+            var windowRightEdge = SystemParameters.VirtualScreenLeft + SystemParameters.VirtualScreenWidth;
             AssociatedObject.LocationChanged += (sender, e) =>
             {
-                if (SystemParameters.VirtualScreenWidth - ((Window)sender).Width < ((Window)sender).Left) ((Window)sender).Left = SystemParameters.VirtualScreenWidth - ((Window)sender).Width;
-                else if (0 > ((Window)sender).Left) ((Window)sender).Left = 0;
+                if (windowRightEdge - ((Window)sender).Width < ((Window)sender).Left) ((Window)sender).Left = windowRightEdge - ((Window)sender).Width;
+                else if (SystemParameters.VirtualScreenLeft > ((Window)sender).Left) ((Window)sender).Left = SystemParameters.VirtualScreenLeft;
                 if (SystemParameters.VirtualScreenHeight - ((Window)sender).Height < ((Window) sender).Top) ((Window)sender).Top = SystemParameters.VirtualScreenHeight - ((Window)sender).Height;
                 else if (0 > ((Window)sender).Top) ((Window)sender).Top = 0;
                 this.Left = ((Window)sender).Left;
